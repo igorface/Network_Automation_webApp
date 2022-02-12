@@ -77,8 +77,11 @@ WSGI_APPLICATION = 'Network_Automation_webApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'netdb',
+        'USER': 'postgres',
+        'PASSWORD': 'pomidor123',
+        'HOST': 'localhost'
     }
 }
 

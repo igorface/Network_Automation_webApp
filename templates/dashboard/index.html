@@ -62,7 +62,57 @@
                     </div>
                 </div>
             </div>
-            <div class="card mb-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <h4>Devices</h4>
+                </div>
+                    <table id="Devices_table" class="display" style="width:100%">
+                    <!-- <table class="table table-hover table-responsive" id="devicesTable"> -->
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Hostname</th>
+                            <th scope="col">IP address</th>
+                            <th scope="col">Vendor</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Software Version</th>
+                            <th scope="col">Active</th>
+                        </tr>
+                        </thead>
+                        {% if devices %}
+                        <tbody>
+                            {% for device in devices %}
+                                <tr>
+                                    <th scope="row">{{ device.id }}</th>
+                                    <td>{{ device.hostname }}</td>
+                                    <td>{{ device.ip_address }}</td>
+                                    <td>{{ device.vendor }}</td>
+                                    <td>{{ device.model }}</td>
+                                    <td>{{ device.software_version }}</td>
+                                    <td>{{ device.is_used }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        {% else %}
+                            <h4>No Devices</h4>
+                        <tfoot>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Hostname</th>
+                                <th scope="col">IP address</th>
+                                <th scope="col">Vendor</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Software Version</th>
+                                <th scope="col">Active</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                <div class="row">
+                    <h4>No Devices</h4>
+                </div>
+                {% endif %}
+            </div>
+            <!-- <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
                     DataTable Example
@@ -549,6 +599,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> -->
         </div>
 {% endblock %}
