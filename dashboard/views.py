@@ -3,4 +3,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse('<h1>Hello World</h1>')
+    return render(request, 'dashboard/index.html')
+
+def vlans_list(request):
+    return render(request, 'dashboard/vlans_list.html')
