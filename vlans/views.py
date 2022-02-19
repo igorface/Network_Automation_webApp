@@ -3,6 +3,7 @@ from dashboard.models import Devices
 from django.forms.models import model_to_dict
 from core.get_vlans import create_coroutines_list, gather_vlans
 from core.get_vlans_thread import get_show_vlans_all
+from django.contrib import admin
 
 
 # Create your views here.
@@ -30,4 +31,4 @@ def create_vlan(request):
     context = {
         'devices': devices
     }
-    return render(request, 'vlans/create_vlan.html', context)
+    return (request, 'vlans/list_vlans.html', context)

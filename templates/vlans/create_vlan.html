@@ -1,14 +1,16 @@
 {% extends 'base.html' %} {% block content %}
-<form>
+<form action="{% url 'create_vlan' %}" method='POST'>
+  <!-- Security Token  -->
+  {% csrf_token %}
     <h1 class="mt-1 px-1">Create Vlan</h1>
     <div class="form-group px-1 font-weight-bold">
-      <label for="Vlan_id"class="font-weight-bold">Vlan id</label>
-      <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Number in range 1 - 4096">
+      <label for="Vlan_id"class="font-weight-bold">Vlan id: </label>
+      <input id="vlan_name" type="text" name="vlan_name" maxlength="100" placeholder="Number in range 1 - 4096" required>
     </div>
     <div class="form-group px-1 ">
-        <label for="Vlan_name" class="font-weight-bold">Vlan name</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Vlan name">
-      </div>
+      <label for="Vlan_name" class="font-weight-bold">Vlan name</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Vlan name" required>
+    </div>
     <div class="form-group px-1">
       <label for="exampleFormControlSelect1">Example select</label>
       <select class="form-control" id="exampleFormControlSelect1">
@@ -31,5 +33,7 @@
       <label for="exampleFormControlTextarea1">Example textarea</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
+    <button type="button" class="btn btn-primary">Submit</button>
+    <!-- <input type="submit" value="Register" class="btn btn-secondary btn-block"> -->
 </form>
 {% endblock %}
