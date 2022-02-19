@@ -24,4 +24,10 @@ def list_vlans(request):
     return render(request, 'vlans/list_vlans.html', context)
 
 def create_vlan(request):
-    return render(request, 'vlans/create_vlan.html')
+    devices = Devices.objects.all()
+    for device in Devices.objects.all():
+        print(device.hostname)
+    context = {
+        'devices': devices
+    }
+    return render(request, 'vlans/create_vlan.html', context)
