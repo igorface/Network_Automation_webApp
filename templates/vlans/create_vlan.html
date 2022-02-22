@@ -1,16 +1,17 @@
 {% extends 'base.html' %} 
 {% block content %}
 <h1 class="mt-1 px-1">Create Vlan</h1>
+{% include '_alerts.html' %}
 <form action="{% url 'create_vlan' %}" method='POST'>
   <!-- Security Token  -->
   {% csrf_token %}
     <div class="form-group px-1">
-      <label for="Vlan bumer">Vlan number</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1 - 4096">
+      <label for="Vlan_number">Vlan number</label>
+      <input type="number" step="1" class="form-control" id="exampleFormControlInput1" placeholder="1 - 4096" name ="vlan_number" required>
     </div>
     <div class="form-group px-1 ">
       <label for="Vlan_name" class="font-weight-bold">Vlan name</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Vlan name" value ="{{ vlan.name }}" required>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Vlan name" name ="vlan_name" required>
     </div>
     <div class="form-group px-1">
       <label for="exampleFormControlSelect1">Example select</label>
@@ -20,21 +21,7 @@
         {% endfor %}
       </select>
     </div>
-    <div class="form-group px-1">
-      <label for="exampleFormControlSelect2">Example multiple select</label>
-      <select multiple class="form-control" id="exampleFormControlSelect2">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    <div class="form-group px-1">
-      <label for="exampleFormControlTextarea1">Example textarea</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    <button type="button" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
     <!-- <input type="submit" value="Register" class="btn btn-secondary btn-block"> -->
 </form>
 {% endblock %}

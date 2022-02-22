@@ -24,3 +24,6 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+setTimeout(function(){
+    $('#message').fadeOut('slow');
+},3000)
