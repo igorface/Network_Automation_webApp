@@ -35,7 +35,7 @@ def create_vlan(request):
         vlan_number = int(vlan_number_input)
         print(type(vlan_number))
         if not vlan_number in range(1,4096):
-            messages.error(request, 'Vlan number in range')
+            messages.error(request, 'Vlan number not in range')
             print('Vlan number not in range')
             return redirect('create_vlan')
         else:
