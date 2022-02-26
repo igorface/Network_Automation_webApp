@@ -24,7 +24,25 @@ def get_show_vlans(ip_address):
         output_parsed = parse_output(platform="arista_eos", command="show vlan", data=output)
     return output_parsed
 
+
 def get_show_vlans_all(hostnames):
+    futures_list = []
+    results = []
+
+    with ThreadPoolExecutor(max_workers=17) as executor:
+        for hostname in hostnames:
+            futures = executor.submit(config_vlans, hostname)
+            futures_list.append(futures)
+
+        for future in futures_list:
+            try:
+                result = future.result(timeout=60)
+                results.append(result)
+            except Exception:
+                results.append(None)
+    return results
+
+def configure_vlans(hostnames):
     futures_list = []
     results = []
 
