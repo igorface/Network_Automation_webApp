@@ -5,7 +5,6 @@ from core.get_vlans import create_coroutines_list, gather_vlans
 from core.get_vlans_thread import get_show_vlans_all
 from django.contrib import admin,messages
 
-
 # Create your views here.
 def list_vlans(request):
     """ Tuple to handle ThreadExecutor"""
@@ -33,15 +32,15 @@ def create_vlan(request):
         vlan_number_input = request.POST['vlan_number']
         vlan_name = request.POST['vlan_name']
         vlan_number = int(vlan_number_input)
-        answer = request.POST['device_dropdown'] 
-        answer_list = request.POST.getlist('device_dropdown')
-        print(answer)
-        print(answer_list)
+        selected_device = request.POST['device_dropdown'] 
+        selected_device_list = request.POST.getlist('device_dropdown')
+        print(selected_device)
+        print(selected_device_list)
         if not vlan_number in range(1,4096):
             messages.error(request, 'Vlan number not in range')
             print('Vlan number not in range')
             return redirect('create_vlan')
         else:
             print('Vlan number in range')
-            
+
     return render(request, 'vlans/create_vlan.html', context)

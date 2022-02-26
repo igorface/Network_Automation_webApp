@@ -1,20 +1,27 @@
 {% extends 'base.html' %} 
 {% block content %}
 <h1 class="mt-1 px-1">Create Vlan</h1>
+  <div class="container-fluid mt-1 px-1">
+    <p><b>Fill up needed information:</b><br>
+      - Vlan numer number from 1 - 4096<br>
+      - Vlan name no more then 50 characters<br>
+      - Select devices on which the vlan should be created
+    </p>
+  </div>
 {% include '_alerts.html' %}
 <form action="{% url 'create_vlan' %}" method='POST'>
   <!-- Security Token  -->
   {% csrf_token %}
     <div class="form-group px-1">
-      <label for="Vlan_number">Vlan number</label>
+      <label for="Vlan_number"><b>Vlan number</b></label>
       <input type="number" step="1" class="form-control" id="exampleFormControlInput1" placeholder="1 - 4096" name ="vlan_number" required>
     </div>
     <div class="form-group px-1 ">
-      <label for="Vlan_name" class="font-weight-bold">Vlan name</label>
+      <label for="Vlan_name" class="font-weight-bold"><b>Vlan name</b></label>
       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Vlan name" name ="vlan_name" required>
     </div>
     <div class="form-group px-1">
-      <label for="exampleFormControlSelect1">Example select</label>
+      <label for="exampleFormControlSelect1"><b>Device select</b></label>
       <!-- <select class="form-control" id="exampleFormControlSelect1" name="device_dropdown">
         {% for device in devices %}
           <option value="{{ device.ip_address }}">{{ device.hostname }}</option>
