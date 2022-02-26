@@ -33,15 +33,15 @@ def create_vlan(request):
         vlan_number_input = request.POST['vlan_number']
         vlan_name = request.POST['vlan_name']
         vlan_number = int(vlan_number_input)
-        print(type(vlan_number))
+        answer = request.POST['device_dropdown'] 
+        answer_list = request.POST.getlist('device_dropdown')
+        print(answer)
+        print(answer_list)
         if not vlan_number in range(1,4096):
             messages.error(request, 'Vlan number not in range')
             print('Vlan number not in range')
             return redirect('create_vlan')
         else:
             print('Vlan number in range')
-
-    else:
-        return render(request, 'vlans/create_vlan.html')
+            
     return render(request, 'vlans/create_vlan.html', context)
-
