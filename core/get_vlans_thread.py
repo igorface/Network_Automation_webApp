@@ -1,20 +1,16 @@
-"""examples.basic_usage.iosxe_driver"""
 from scrapli.driver.core import IOSXEDriver
 from concurrent.futures import ThreadPoolExecutor
 from ntc_templates.parse import parse_output
+from core.credentials import get_password, get_username
 
-MY_DEVICE = {
-    "host": "10.0.0.1",
-    "auth_username": "admin",
-    "auth_password": "arista",
-    "auth_strict_key": False,
-}
+username = get_username()
+password = get_password()
 
 def get_show_vlans(ip_address):
     MY_DEVICE = {
         "host": f"{ip_address}",
-        "auth_username": "admin",
-        "auth_password": "arista",
+        "auth_username": f"{username}",
+        "auth_password": f"{password}",
         "auth_strict_key": False,
     }
     with IOSXEDriver(**MY_DEVICE) as conn:
@@ -58,6 +54,16 @@ def configure_vlans(hostnames):
                 results.append(None)
     return results
 
+def create_eapi_conf_file(device, username, password):
+    with open("eapi.conf", "w") as file:
+        file.append(f"""
+        [connection:veos01]
+        host: {device}
+        transport: https
+        username: {username}
+        password: {password}
+        """)
+
 
 if __name__ == "__main__":
     hostnames = (
@@ -67,6 +73,5 @@ if __name__ == "__main__":
         "10.0.0.102",
     )
 
-    results = get_show_vlans_all(hostnames)
-    for result in results:
-        print(result)
+    for hostname in hostnames:
+        create_eapi_conf_file(hostname, "admin", "arista")
