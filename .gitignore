@@ -13,3 +13,4 @@ db.sqlite3-journal
 /media
 /static
 /core/credentials.py
+/core/eapi.conf
