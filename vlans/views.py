@@ -22,7 +22,7 @@ def list_vlans(request):
     results_of_show_vlan = get_show_vlans_all(hostnames)
     print(results_of_show_vlan[0])
     context = {
-        "results": results_of_show_vlan[0],
+        'results': results_of_show_vlan[0],
     }
     return render(request, 'vlans/list_vlans.html', context)
 
@@ -37,8 +37,6 @@ def create_vlan(request):
         vlan_number = int(vlan_number_input)
         selected_device = request.POST['device_dropdown'] 
         selected_device_list = request.POST.getlist('device_dropdown')
-        # print(selected_device)
-        # print(selected_device_list)
         if not vlan_number in range(1,4096):
             messages.error(request, 'Vlan number not in range')
             print('Vlan number not in range')
@@ -46,15 +44,44 @@ def create_vlan(request):
         else:
             username = get_username()
             password = get_password()
+            global results_of_tasks
+            results_of_tasks = []
             for item in selected_device_list:
                 create_eapi_conf_file(item, username, password)
                 pyeapi.load_config('core/eapi.conf')
-                node = pyeapi.connect_to(f'{item}')
-                create_vlan = node.api('vlans')
-                create_vlan_result = create_vlan.create(vlan_number)
-                create_vlan_name_result = create_vlan.set_name(vlan_number, vlan_name)
-                print(f"Vlan created: {create_vlan_result}" )
-                print(f"Vlan name created: {create_vlan_name_result}" )
+                try:
+                    node = pyeapi.connect_to(f'{item}')
+                    create_vlan = node.api('vlans')
+                    create_vlan_result = create_vlan.create(vlan_number)
+                    create_vlan_name_result = create_vlan.set_name(vlan_number, vlan_name)
+                    results_of_tasks.append(f'Vlan {vlan_number} name: {vlan_name} was created on Device with IP: {item}')
+                    print(f'Vlan created: {vlan_number}' )
+                    print(f'Vlan name created: {vlan_name}' )
+                except:
+                    return redirect('unable_to_connect')
+                
+                # node = pyeapi.connect_to(f'{item}')
+                # create_vlan = node.api('vlans')
+                # # is_valid = create_vlan.isvlan(vlan_number)
+                # # print(f'Is valid : {is_valid}')
+                # create_vlan_result = create_vlan.create(vlan_number)
+                # create_vlan_name_result = create_vlan.set_name(vlan_number, vlan_name)
+                # results_of_tasks.append(f'Vlan {vlan_number} name: {vlan_name} was created on Device with IP: {item}')
+                # print(f'Vlan created: {vlan_number}' )
+                # print(f'Vlan name created: {vlan_name}' )
 
+            return redirect('result_of_creating_vlan')
 
     return render(request, 'vlans/create_vlan.html', context)
+
+def result_of_creating_vlan(request):
+    print(type(results_of_tasks))
+    print(results_of_tasks)
+    context = {
+        'results': results_of_tasks,
+    }
+    return render(request, 'vlans/result_of_creating_vlan.html', context)
+
+def unable_to_connect(request):
+    return render(request, 'vlans/unable_to_connect.html')
+    

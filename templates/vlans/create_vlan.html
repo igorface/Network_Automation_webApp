@@ -8,8 +8,8 @@
       - Select devices on which the vlan should be created
     </p>
   </div>
-{% include '_alerts.html' %}
-<form action="{% url 'create_vlan' %}" method='POST'>
+  {% include '_alerts.html' %}
+  <form action="{% url 'create_vlan' %}" method='POST'>
   <!-- Security Token  -->
   {% csrf_token %}
     <div class="form-group px-1">
@@ -35,5 +35,5 @@
     </div>
     <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
     <!-- <input type="submit" value="Register" class="btn btn-secondary btn-block"> -->
-</form>
+  </form>
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1>Result of Creating Vlans</h1>
+
+<div class="container-fluid mt-1 px-1">
+    <p><b>Result: </b><br></p>  
+    {% for result in results %}
+        <p>{{ result }} <i class="fa-solid fa-check" style="color:green"></i></p>
+    {% endfor %}
+</div>
+
+{% endblock %}

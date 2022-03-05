@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig',
-    'vlans.apps.VlansConfig'
+    'vlans.apps.VlansConfig',
+    'fontawesomefree'
 ]
 
 MIDDLEWARE = [
