@@ -14,19 +14,14 @@
   {% csrf_token %}
     <div class="form-group px-1">
       <label for="Vlan_number"><b>Vlan number</b></label>
-      <input type="number" step="1" class="form-control" id="exampleFormControlInput1" placeholder="1 - 4096" name ="vlan_number" required>
+      <input type="number" step="1" class="form-control" id="DevicesFormControlInput1" placeholder="1 - 4096" name ="vlan_number" required>
     </div>
     <div class="form-group px-1 ">
       <label for="Vlan_name" class="font-weight-bold"><b>Vlan name</b></label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Vlan name" name ="vlan_name" required>
+      <input type="text" class="form-control" id="DevicesFormControlInput1" placeholder="Vlan name" name ="vlan_name" required>
     </div>
     <div class="form-group px-1">
-      <label for="exampleFormControlSelect1"><b>Device select</b></label>
-      <!-- <select class="form-control" id="exampleFormControlSelect1" name="device_dropdown">
-        {% for device in devices %}
-          <option value="{{ device.ip_address }}">{{ device.hostname }}</option>
-        {% endfor %}
-      </select> -->
+      <label for="DevicesFormControlSelect1"><b>Device select</b></label>
       <select name="device_dropdown" multiple class="form-select" aria-label="device_dropdown" required>
         {% for device in devices %}
           <option value="{{ device.ip_address }}">{{ device.hostname }}</option>
