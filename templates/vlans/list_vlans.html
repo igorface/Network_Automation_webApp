@@ -1,9 +1,34 @@
 {% extends 'base.html' %} 
 {% block content %}
-<h1>List of Vlans</h1>
-
-{% for result in results %}
-Vlan numer: {{ result.vlan_id }}
-{% endfor %}
-
+            <h1>List of Vlans</h1>
+            <div class="card-body">
+                <table id="VlansDataTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Vlan_id</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Vlan_id</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for vlan in vlans %}
+                        <tr>
+                            <th scope="row">{{ vlan.id }}</th>
+                            <td>{{ vlan.number }}</td>
+                            <td>{{ vlan.name }}</td>
+                            <td>{{ vlan.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 {% endblock %}

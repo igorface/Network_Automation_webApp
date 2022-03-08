@@ -6,6 +6,7 @@ from core.credentials import get_password, get_username
 username = get_username()
 password = get_password()
 
+
 def get_show_vlans(ip_address):
     MY_DEVICE = {
         "host": f"{ip_address}",
