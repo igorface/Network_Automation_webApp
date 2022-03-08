@@ -2,10 +2,9 @@
 {% block content %}
             <h1>List of Vlans</h1>
             <div class="card-body">
-                <table id="VlansDataTable">
+                <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Vlan_id</th>
                             <th>Name</th>
                             <th>Status</th>
@@ -13,7 +12,6 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>#</th>
                             <th>Vlan_id</th>
                             <th>Name</th>
                             <th>Status</th>
@@ -22,8 +20,7 @@
                     <tbody>
                         {% for vlan in vlans %}
                         <tr>
-                            <th scope="row">{{ vlan.id }}</th>
-                            <td>{{ vlan.number }}</td>
+                            <td scope="row">{{ vlan.number }}</td>
                             <td>{{ vlan.name }}</td>
                             <td>{{ vlan.status }}</td>
                         </tr>

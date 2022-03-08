@@ -17,10 +17,10 @@ password = get_password()
 
 # Create your views here.
 def list_vlans(request):
-    """ Tuple to handle ThreadExecutor"""
     hostnames = ()
     devices = Devices.objects.all()
     vlans = Vlans()
+    """ Tuple to handle ThreadExecutor"""
     futures_list = []
     results = []
 
@@ -38,8 +38,6 @@ def list_vlans(request):
                 results.append(None)
 
     for result in results:
-        # pprint(result)
-        # pprint(type(result))
         for item in result:
             print(item['vlan_id'])
             obj = Vlans.objects.get_or_create(
