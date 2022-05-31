@@ -1,5 +1,7 @@
+from genericpath import exists
 from django.db import models
 from dashboard.models import Devices
+from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 class Vlans(models.Model):

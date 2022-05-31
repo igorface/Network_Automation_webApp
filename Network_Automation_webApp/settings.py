@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-=5@r!sstm)m#)gi8-%w_&smj-doifl1!$z&ro6wi9m61xtpz2x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig',
     'vlans.apps.VlansConfig',
-    'fontawesomefree'
+    'fontawesomefree',
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -78,13 +79,23 @@ WSGI_APPLICATION = 'Network_Automation_webApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'netdb',
+#         'USER': 'postgres',
+#         'PASSWORD': 'pomidor123',
+#         'HOST': 'localhost'
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'netdb',
-        'USER': 'postgres',
-        'PASSWORD': 'pomidor123',
-        'HOST': 'localhost'
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
@@ -138,3 +149,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
