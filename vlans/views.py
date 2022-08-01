@@ -128,8 +128,7 @@ def delete_vlan(request):
                     #delete vlan from model
                     Vlans.objects.filter(number = vlan_number).detele()
                 except:
-                    results_of_deleting_vlan.append(f'Vlan {vlan_number} was not deleted on Device with IP: {item}')
-                    # return redirect('unable_to_connect')
+                    return redirect('unable_to_connect')
             
             return redirect('result_of_deleting_vlan')
 

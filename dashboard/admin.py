@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import Devices
-
-# Register your models here.
-# class DevicesAdmin(admin.ModelAdmin):
-    # list_display = ('hostname', 'ip_address', 'vendor', 'model', 'software_version', 'is_used')
-    # list_display_links = ('id', 'hostname')
-    # search_fields = ('hostname', 'ip_address', 'vendor', 'model', 'software_version')
-    
+# class Devices(models.Model):
+#     hostname = models.CharField(max_length=200)
+#     ip_address = models.GenericIPAddressField()
+#     vendor = models.CharField(max_length=100)
+#     model = models.CharField(max_length=100)
+#     software_version = models.CharField(max_length=100)
+#     is_used = models.BooleanField(default=False)
 admin.site.register(Devices)
