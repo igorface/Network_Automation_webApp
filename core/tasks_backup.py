@@ -2,8 +2,7 @@ import time
 import pyeapi
 from celery import Celery
 from pprint import pprint
-from scrapli.driver.core import NXOSDriver
-# from core.eapi_modules import create_eapi_conf_file
+from core.eapi_modules import create_eapi_conf_file
 
 app = Celery('tasks', backend='redis://redis:6379/0', broker='redis://redis:6379/0')
 
@@ -13,21 +12,6 @@ def add(x, y):
 	print('{} + {} = {}'.format(x, y, total))
 	time.sleep(10)
 	return total
-
-@app.task(name='get_vlans_nxos')
-def get_vlans_nxos():
-    MY_DEVICE = {
-    "host": "10.10.20.177",
-    "auth_username": "cisco",
-    "auth_password": "cisco",
-    "auth_strict_key": False,
-    }
-    with NXOSDriver(**MY_DEVICE) as conn:
-        # Platform drivers will auto-magically handle disabling paging for you
-        response = conn.send_command("show vlan")
-        structured_result = response.textfsm_parse_output()
-        pprint(structured_result)
-
 
 @app.task(name='tasks.show_vlan')
 def show_vlan(device_ip, username, password):
